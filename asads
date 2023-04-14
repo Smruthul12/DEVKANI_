@@ -1,0 +1,86 @@
+import React, { useEffect, useRef } from "react";
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, SafeAreaView, Animated, Image} from 'react-native';
+import {
+    useSafeAreaInsets,
+
+  } from 'react-native-safe-area-context';
+import { useFonts } from 'expo-font';
+//logo
+import Logo from '../assets/image-removebg-preview.png'
+export default function Splashscreen(){
+    
+<StatusBar style="auto" />
+    const [fontsLoaded] = useFonts({
+        'VisbyExtrabold': require('../assets/fonts/VisbyExtrabold.otf'),
+      });
+    
+    
+        //Safearea value
+    const edges=useSafeAreaInsets();
+
+    //Animation 
+    const startAnimation =useRef(new Animated.Value(0)).current;
+    useEffect(()=>{
+        //starting animantion after 500sec
+        setTimeout(()=>{
+            //sequence
+            Animated.timing(startAnimation,{
+                toValue:1,
+                duration:100,
+                useNativeDriver:true,
+            }).start();
+        },500);
+
+    },[])
+    return(
+
+
+        <Animated.View style={{
+            position: 'absolute',
+            top: 0,
+            bottom:0,
+            left:0,
+            right:0,
+            backgroundColor:'#F9FAFC'
+
+        }}>
+        
+        <Animated.View style={{
+            flex: 1,
+            alignItems:'center',
+            justifyContent:'center',
+            transform:{
+                translateY:startAnimation }
+
+        }}>
+            <Image source={Logo} style={{
+                width: 200,
+                height: 200,
+                marginBottom:3,
+            }}>
+            </Image>
+            <Text style={{
+                fontSize: 25,
+                fontWeight: 'bold',
+                color: '#182748',
+             
+            }}>
+                DevKani
+            </Text>
+        </Animated.View>
+         
+    </Animated.View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: 'VisbyExtrabold',
+       fontSize: 30 ,
+    },
+  });

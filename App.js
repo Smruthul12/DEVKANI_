@@ -19,8 +19,8 @@ export default function App() {
    
       //SAFE AREA CALCULATION
       <SafeAreaProvider>
-        <Splashscreen >
-
+        <Splashscreen>
+          
         </Splashscreen>
 
       </SafeAreaProvider>
